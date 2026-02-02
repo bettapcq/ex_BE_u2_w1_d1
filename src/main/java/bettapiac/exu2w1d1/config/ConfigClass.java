@@ -1,11 +1,13 @@
 package bettapiac.exu2w1d1.config;
 
 import bettapiac.exu2w1d1.entities.Drink;
+import bettapiac.exu2w1d1.entities.Menu;
 import bettapiac.exu2w1d1.entities.Pizza;
 import bettapiac.exu2w1d1.entities.Topping;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +44,7 @@ public class ConfigClass {
         return new Topping("salamino'", 3.00, 300, true);
     }
 
-
+    //MARGHERITA (BASE)
     @Bean
     public Pizza margherita() {
         List<Topping> toppingList = new ArrayList<>();
@@ -54,8 +56,9 @@ public class ConfigClass {
 
     }
 
-    @Bean
-    public Pizza condita(String name, ArrayList<Topping> toppings) {
+    //PIZZA CONDITA
+
+    public Pizza creaPizza(String name, List<Topping> toppings) {
         List<Topping> toppingList = new ArrayList<>(margherita().getToppingsList());
         toppingList.addAll(toppings);
         Double totPrice = toppingList.stream().mapToDouble(Topping::getPrice).sum();
@@ -63,17 +66,47 @@ public class ConfigClass {
         return new Pizza(name, totPrice, totCalories, toppingList);
     }
 
+    @Bean
+    public Pizza prosciuttosa() {
+        return creaPizza("Prosciuttosa", List.of(prosciutto()));
+    }
+
+    @Bean
+    public Pizza montanara() {
+        return creaPizza("Montanara", List.of(funghi()));
+    }
+
+    @Bean
+    public Pizza diavola() {
+        return creaPizza("Diavola", List.of(salamino(), nduja()));
+    }
+
     // Drink
     @Bean
-    public Drink colaLarge(String size) {
+    public Drink cocaCola() {
         return new Drink("Coca-Cola", 3.0, 150);
     }
 
     // Drink
     @Bean
-    public Drink sprite(String size) {
+    public Drink sprite() {
         return new Drink("Sprite", 3.0, 150);
     }
 
+    // Menu
+    @Bean
+    public Menu menu() {
+        return new Menu(
+                List.of(
+                        margherita(),
+                        prosciuttosa(),
+                        montanara(),
+                        diavola();
+                ),
+                List.of(cocaCola(),
+                        sprite();
+                )
+        );
+    }
 }
 
