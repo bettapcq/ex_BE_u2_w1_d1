@@ -94,7 +94,7 @@ public class ConfigClass {
 
     // Menu
     @Bean
-    public Menu menu() {
+    public Menu getMenu() {
         return new Menu(
                 List.of(
                         margherita(),
