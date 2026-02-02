@@ -101,12 +101,12 @@ public class ConfigClass {
                         margherita(),
                         prosciuttosa(),
                         montanara(),
-                        diavola();
-                ),
+                        diavola()
+                );
                 List.of(cocaCola(),
-                        sprite();
-                )
-        );
+                        sprite()
+
+        )
     }
 }
 
