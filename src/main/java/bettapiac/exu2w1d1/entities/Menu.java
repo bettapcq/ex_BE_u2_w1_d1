@@ -39,9 +39,13 @@ public class Menu {
         System.out.println("__MENU__");
 
         System.out.println("__PIZZAS__");
-        pizzasList.forEach(pizza -> System.out.println(pizza.getName() + "/" + pizza.getCalories() + "/" + pizza.getToppingsList() + "/" + pizza.getPrice()));
+        pizzasList.forEach(pizza -> System.out.println(pizza.getName() + " / " + pizza.getCalories()
+                        + " Kgcal / " + pizza.getToppingsList().stream().map(topping -> topping.getName()).toList().toString()
+                        + " / " + pizza.getPrice() + "€"
+                )
+        );
 
         System.out.println("__DRINKS__");
-        drinksList.forEach(drink -> System.out.println(drink.getName() + "/" + drink.getCalories() + "/" + drink.getSize() + "/" + drink.getPrice()));
+        drinksList.forEach(drink -> System.out.println(drink.getName() + " / " + drink.getCalories() + " Kgcal / " + drink.getPrice() + "€"));
     }
 }

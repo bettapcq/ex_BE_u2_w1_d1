@@ -7,7 +7,6 @@ import bettapiac.exu2w1d1.entities.Topping;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,17 +30,17 @@ public class ConfigClass {
 
     @Bean
     public Topping nduja() {
-        return new Topping("'nduja'", 3.70, 200, true);
+        return new Topping("'nduja", 3.70, 200, true);
     }
 
     @Bean
     public Topping funghi() {
-        return new Topping("funghi'", 3.00, 270, false);
+        return new Topping("funghi", 3.00, 270, false);
     }
 
     @Bean
     public Topping salamino() {
-        return new Topping("salamino'", 3.00, 300, true);
+        return new Topping("salamino", 3.00, 300, true);
     }
 
     //MARGHERITA (BASE)
@@ -102,11 +101,11 @@ public class ConfigClass {
                         prosciuttosa(),
                         montanara(),
                         diavola()
-                );
+                ),
                 List.of(cocaCola(),
                         sprite()
 
-        )
+                ));
     }
 }
 
