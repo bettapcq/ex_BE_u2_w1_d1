@@ -1,5 +1,6 @@
 package bettapiac.exu2w1d1.config;
 
+import bettapiac.exu2w1d1.entities.Drink;
 import bettapiac.exu2w1d1.entities.Pizza;
 import bettapiac.exu2w1d1.entities.Topping;
 import org.springframework.context.annotation.Bean;
@@ -54,8 +55,25 @@ public class ConfigClass {
     }
 
     @Bean
-    public Pizza condita() {
+    public Pizza condita(String name, ArrayList<Topping> toppings) {
         List<Topping> toppingList = new ArrayList<>(margherita().getToppingsList());
-
+        toppingList.addAll(toppings);
+        Double totPrice = toppingList.stream().mapToDouble(Topping::getPrice).sum();
+        int totCalories = toppingList.stream().mapToInt(Topping::getCalories).sum();
+        return new Pizza(name, totPrice, totCalories, toppingList);
     }
+
+    // Drink
+    @Bean
+    public Drink colaLarge(String size) {
+        return new Drink("Coca-Cola", 3.0, 150);
+    }
+
+    // Drink
+    @Bean
+    public Drink sprite(String size) {
+        return new Drink("Sprite", 3.0, 150);
+    }
+
 }
+
