@@ -1,0 +1,61 @@
+package bettapiac.exu2w1d1.config;
+
+import bettapiac.exu2w1d1.entities.Pizza;
+import bettapiac.exu2w1d1.entities.Topping;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Configuration
+public class ConfigClass {
+
+    @Bean
+    public Topping pomodoro() {
+        return new Topping("Pomodoro", 2.30, 150, false);
+    }
+
+    @Bean
+    public Topping mozzarella() {
+        return new Topping("Mozzarella", 2.70, 200, false);
+    }
+
+    @Bean
+    public Topping prosciutto() {
+        return new Topping("Prosciutto", 3.50, 180, false);
+    }
+
+    @Bean
+    public Topping nduja() {
+        return new Topping("'nduja'", 3.70, 200, true);
+    }
+
+    @Bean
+    public Topping funghi() {
+        return new Topping("funghi'", 3.00, 270, false);
+    }
+
+    @Bean
+    public Topping salamino() {
+        return new Topping("salamino'", 3.00, 300, true);
+    }
+
+
+    @Bean
+    public Pizza margherita() {
+        List<Topping> toppingList = new ArrayList<>();
+        toppingList.add(pomodoro());
+        toppingList.add(mozzarella());
+        Double totPrice = toppingList.stream().mapToDouble(Topping::getPrice).sum();
+        int totCalories = toppingList.stream().mapToInt(Topping::getCalories).sum();
+        return new Pizza("Margherita", totPrice, totCalories, toppingList);
+
+    }
+
+    @Bean
+    public Pizza condita() {
+        List<Topping> toppingList = new ArrayList<>(margherita().getToppingsList());
+
+    }
+}
